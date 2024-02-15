@@ -7,6 +7,10 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +30,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class User {
-
+	
+	@Schema(description = "Unique identifier of the Users. generated automtically",
+			 accessMode = AccessMode.READ_ONLY)
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	@JdbcTypeCode(java.sql.Types.VARCHAR)
@@ -44,10 +51,13 @@ public class User {
 	@Size(min = 3, max = 25)
 	@Pattern(regexp = "^[a-zA-Z0-9_-]+$")
 	String username;
-
+	
+    @NotBlank
 	@Email
 	String email;
-
+    @Schema(description = "Date creation of object generated automtically",
+			 accessMode = AccessMode.READ_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@CreatedDate
 	private LocalDateTime dateCreated;
    

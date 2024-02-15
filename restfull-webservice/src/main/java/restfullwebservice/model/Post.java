@@ -8,7 +8,10 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
@@ -30,7 +33,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Post {
-
+	
+	 @Schema(description = "identifier of the Posts. generated automtically",
+			 accessMode = AccessMode.READ_ONLY)
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
@@ -45,6 +51,9 @@ public class Post {
 	@Size(min=1,max=160)
 	String content;
 	
+	@Schema(description = "Date creation of object generated automtically",
+			 accessMode = AccessMode.READ_ONLY)
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@CreatedDate
 	private LocalDateTime dateCreated;
 	
