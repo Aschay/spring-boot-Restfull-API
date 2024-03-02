@@ -54,7 +54,6 @@ public class PostController {
 
 	@Operation(summary = "Find All posts by a user Id", tags = { "post" })
 	@GetMapping("/users/{id}/posts")
-	// surppress hateos details from showing up in swagger ui
 	@ApiResponses(value = {
 			@ApiResponse( content = @Content(array = @ArraySchema(schema = @Schema(implementation = Post.class)))) })
 	public CollectionModel<EntityModel<Post>> getAllPost(@Valid @PathVariable UUID id) {

@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -33,35 +34,32 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Post {
-	
-	 @Schema(description = "identifier of the Posts. generated automtically",
-			 accessMode = AccessMode.READ_ONLY)
+
+	@Schema(description = "identifier of the Posts. generated automtically", accessMode = AccessMode.READ_ONLY)
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
-	
+
 	@NotBlank
-	@Size(min=1,max=50)
+	@Size(min = 1, max = 50)
 	@Pattern(regexp = "^[a-zA-Z]+$")
 	String title;
-	
-	
+
 	@NotBlank
-	@Size(min=1,max=160)
+	@Size(min = 1, max = 160)
 	String content;
-	
-	@Schema(description = "Date creation of object generated automtically",
-			 accessMode = AccessMode.READ_ONLY)
+
+	@Schema(description = "Date creation of object generated automtically", accessMode = AccessMode.READ_ONLY)
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@CreatedDate
 	private LocalDateTime dateCreated;
-	
-    @ManyToOne(fetch = FetchType.LAZY ,optional =false)
-    @JoinColumn(name = "user_id",nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private User user;
-	
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "user_id", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnore
+	private User user;
 
 }
