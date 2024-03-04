@@ -1,4 +1,4 @@
-package restfullwebservice.config.openapi;
+package restfullwebservice.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -62,6 +62,6 @@ public class OpenApiConfig {
 	        return new OAuthFlow()
 	            .authorizationUrl(authServerUrl + "/realms/" + realm + "/protocol/openid-connect/auth")
 	            .scopes(new Scopes().addString("read_access", "read data")
-	                .addString("write_access", "modify data"));
+	             .addString("write_access", "modify data"));
 	    }
 }

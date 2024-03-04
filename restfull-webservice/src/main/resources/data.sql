@@ -1,5 +1,4 @@
 
-
 /*
 CREATE TRIGGER before_insert_user
   BEFORE INSERT ON `user`

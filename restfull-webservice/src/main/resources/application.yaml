@@ -1,12 +1,12 @@
 keycloak:
-  auth-server-url: http://localhost:8081 # Keycloak server url
-  realm: SpringBootKeycloak # Keycloak Realm
+  auth-server-url: http://localhost:8082 # Keycloak server url
+  realm: SpringBootOpenAPI # Keycloak Realm
     
 spring:
    security:
       oauth2:
          resourceserver:
-            jwt.issuer-uri: http://localhost:8081/realms/SpringBootKeycloak
+            jwt.issuer-uri: http://localhost:8082/realms/SpringBootOpenAPI
 
 springdoc:
    swagger-ui:
